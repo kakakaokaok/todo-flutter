@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -180,12 +181,120 @@ class ShowTodos extends StatelessWidget {
           key: ValueKey(todos[index].id),
           background: showBackground(0),
           secondaryBackground: showBackground(1),
-          child: Text(
-            todos[index].desc,
-            style: TextStyle(fontSize: 20.0),
-          ),
+          onDismissed: (_) => context.read<TodoList>().removeTodo(todos[index]),
+          confirmDismiss: (_) {
+            return showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: Text('Are you sure?'),
+                    content: Text('Do you really want to delete?'),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.pop(context, false),
+                        child: Text('No'),
+                      ),
+                      TextButton(
+                        onPressed: () => Navigator.pop(context, true),
+                        child: Text('Yes'),
+                      ),
+                    ],
+                  );
+                });
+          },
+          child: TodoItem(todo: todos[index]),
         );
       },
+    );
+  }
+}
+
+class TodoItem extends StatefulWidget {
+  final Todo todo;
+
+  const TodoItem({
+    Key? key,
+    required this.todo,
+  }) : super(key: key);
+
+  @override
+  State<TodoItem> createState() => _TodoItemState();
+}
+
+class _TodoItemState extends State<TodoItem> {
+  late final TextEditingController textController;
+
+  @override
+  void initState() {
+    super.initState();
+    textController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    textController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      onTap: () {
+        showDialog(
+          context: context,
+          builder: (context) {
+            bool _error = false;
+            textController.text = widget.todo.desc;
+
+            /// Dialog 내에서 state를 handling 할 것이기 때문에
+            return StatefulBuilder(
+              builder: (BuildContext context, StateSetter setState) {
+                /// Dialog는 현재 위치에 scoped 된게 아니다.
+                /// 즉, TodoItem위젯의 child가 아님.
+                return AlertDialog(
+                  title: Text('Edit todo'),
+                  content: TextField(
+                    controller: textController,
+                    autocorrect: true,
+                    decoration: InputDecoration(
+                        errorText: _error ? 'Value cannot be empty' : null),
+                  ),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: Text('CANCEL'),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        /// error가 발생했을 때 validationError를 표시하기 위해 setState를 사용함
+                        setState(() {
+                          _error = textController.text.isEmpty ? true : false;
+
+                          if (!_error) {
+                            context.read<TodoList>().editTodo(
+                                  widget.todo.id,
+                                  textController.text,
+                                );
+                            Navigator.pop(context);
+                          }
+                        });
+                      },
+                      child: Text('EDIT'),
+                    ),
+                  ],
+                );
+              },
+            );
+          },
+        );
+      },
+      leading: Checkbox(
+        value: widget.todo.completed,
+        onChanged: (bool? checked) {
+          context.read<TodoList>().toggleTodo(widget.todo.id);
+        },
+      ),
+      title: Text(widget.todo.desc),
     );
   }
 }
