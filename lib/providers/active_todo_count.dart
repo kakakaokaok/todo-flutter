@@ -2,6 +2,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 
+import '../logger/logger.dart';
 import '../models/todo_model.dart';
 import 'todo_list.dart';
 
@@ -35,6 +36,8 @@ class ActiveTodoCount with ChangeNotifier {
   ActiveTodoCountState get state => _state;
 
   void update(TodoList todoList) {
+    logger.d(todoList.state);
+
     /// 프록시 프로바이더를 통해 가능?
     final int newActiveTodoCount = todoList.state.todos
         .where((Todo todo) => !todo.completed)
@@ -42,6 +45,7 @@ class ActiveTodoCount with ChangeNotifier {
         .length;
 
     _state = _state.copyWith(activeTodoCount: newActiveTodoCount);
+    logger.d(state);
     notifyListeners();
   }
 }
