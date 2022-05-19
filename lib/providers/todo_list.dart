@@ -2,6 +2,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 
+import '../logger/logger.dart';
 import '../models/todo_model.dart';
 
 class TodoListState extends Equatable {
@@ -42,6 +43,7 @@ class TodoList with ChangeNotifier {
     final newTodos = [..._state.todos, newTodo];
 
     _state = _state.copyWith(todos: newTodos);
+    logger.d(_state);
     notifyListeners();
   }
 
