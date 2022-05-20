@@ -33,9 +33,8 @@ class ActiveTodoCountState extends Equatable {
 
 class ActiveTodoCount {
   final TodoList todoList;
-  ActiveTodoCount({
-    required this.todoList,
-  });
+
+  ActiveTodoCount(this.todoList);
   ActiveTodoCountState get state => ActiveTodoCountState(
       activeTodoCount: todoList.state.todos
           .where((Todo todo) => !todo.completed)
