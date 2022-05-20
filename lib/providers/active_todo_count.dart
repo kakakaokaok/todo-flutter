@@ -12,9 +12,9 @@ class ActiveTodoCountState extends Equatable {
     required this.activeTodoCount,
   });
 
-  factory ActiveTodoCountState.initial() {
-    return ActiveTodoCountState(activeTodoCount: 0);
-  }
+  // factory ActiveTodoCountState.initial() {
+  //   return ActiveTodoCountState(activeTodoCount: 0);
+  // }
 
   @override
   List<Object> get props => [activeTodoCount];
@@ -32,8 +32,17 @@ class ActiveTodoCountState extends Equatable {
 }
 
 class ActiveTodoCount with ChangeNotifier {
-  ActiveTodoCountState _state = ActiveTodoCountState.initial();
+  // ActiveTodoCountState _state = ActiveTodoCountState.initial();
+  late ActiveTodoCountState _state;
+  final int initialActiveTodoCount;
   ActiveTodoCountState get state => _state;
+
+  ActiveTodoCount({
+    required this.initialActiveTodoCount,
+  }) {
+    logger.d('initialActiveTodoCount: $initialActiveTodoCount');
+    _state = ActiveTodoCountState(activeTodoCount: initialActiveTodoCount);
+  }
 
   void update(TodoList todoList) {
     logger.d(todoList.state);
