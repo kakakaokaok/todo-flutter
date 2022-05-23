@@ -32,10 +32,10 @@ class TodoSearchState extends Equatable {
 
 class TodoSearch extends StateNotifier<TodoSearchState> {
   /// Will it work?
-  TodoSearch(super.state) {
-    TodoSearch(TodoSearchState.initial());
-  }
-  // TodoSearch() : super(TodoSearchState.initial());
+  // TodoSearch(super.state) {
+  //   TodoSearch(TodoSearchState.initial());
+  // }
+  TodoSearch() : super(TodoSearchState.initial());
 
   void setSearchTerm(String newSearchTerm) {
     state = state.copyWith(searchTerm: newSearchTerm);

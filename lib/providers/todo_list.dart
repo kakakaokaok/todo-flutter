@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
 import 'package:state_notifier/state_notifier.dart';
 
 import '../logger/logger.dart';
@@ -12,7 +11,7 @@ class TodoListState extends Equatable {
     required this.todos,
   });
 
-  factory TodoListState.intial() {
+  factory TodoListState.initial() {
     return TodoListState(todos: [
       Todo(id: '1', desc: 'Clean the room'),
       Todo(id: '2', desc: 'Wash the dish'),
@@ -36,10 +35,10 @@ class TodoListState extends Equatable {
 }
 
 class TodoList extends StateNotifier<TodoListState> {
-  TodoList(super.state) {
-    TodoList(TodoListState.intial());
-  }
-  // TodoList() : super(TodoListState.initial());
+  // TodoList(super.state) {
+  //   TodoList(TodoListState.intial());
+  // }
+  TodoList() : super(TodoListState.initial());
 
   void addTodo(String todoDesc) {
     final newTodo = Todo(desc: todoDesc);

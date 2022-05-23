@@ -35,10 +35,10 @@ class FilteredTodosState extends Equatable {
 
 class FilteredTodos extends StateNotifier<FilteredTodosState>
     with LocatorMixin {
-  FilteredTodos(super.state) {
-    FilteredTodos(FilteredTodosState.initial());
-  }
-  // FilteredTodos() : super(FilteredTodosState.initial());
+  // FilteredTodos(super.state) {
+  //   FilteredTodos(FilteredTodosState.initial());
+  // }
+  FilteredTodos() : super(FilteredTodosState.initial());
 
   // FilteredTodosState get state {
   //   List<Todo> _filteredTodos;
