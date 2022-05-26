@@ -46,10 +46,8 @@ class ActiveTodoCountState extends Equatable {
 
 class ActiveTodoCount extends StateNotifier<ActiveTodoCountState>
     with LocatorMixin {
-  // ActiveTodoCount(super.state) {
-  //   ActiveTodoCount(ActiveTodoCountState.initial());
-  // }
-  ActiveTodoCount() : super(ActiveTodoCountState.initial());
+  // ActiveTodoCount() : super(ActiveTodoCountState.initial());
+  ActiveTodoCount(super.state);
 
   @override
   void update(Locator watch) {

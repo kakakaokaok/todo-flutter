@@ -17,19 +17,19 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         StateNotifierProvider<TodoFilter, TodoFilterState>(
-          create: (context) => TodoFilter(),
+          create: (context) => TodoFilter(TodoFilterState.initial()),
         ),
         StateNotifierProvider<TodoSearch, TodoSearchState>(
-          create: (context) => TodoSearch(),
+          create: (context) => TodoSearch(TodoSearchState.initial()),
         ),
         StateNotifierProvider<TodoList, TodoListState>(
-          create: (context) => TodoList(),
+          create: (context) => TodoList(TodoListState.initial()),
         ),
         StateNotifierProvider<ActiveTodoCount, ActiveTodoCountState>(
-          create: (context) => ActiveTodoCount(),
+          create: (context) => ActiveTodoCount(ActiveTodoCountState.initial()),
         ),
         StateNotifierProvider<FilteredTodos, FilteredTodosState>(
-          create: (context) => FilteredTodos(),
+          create: (context) => FilteredTodos(FilteredTodosState.initial()),
         ),
       ],
       child: MaterialApp(

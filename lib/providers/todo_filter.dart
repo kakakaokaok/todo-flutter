@@ -31,7 +31,8 @@ class TodoFilterState extends Equatable {
 }
 
 class TodoFilter extends StateNotifier<TodoFilterState> {
-  TodoFilter() : super(TodoFilterState.initial());
+  // TodoFilter() : super(TodoFilterState.initial());
+  TodoFilter(super.state);
 
   void changeFilter(Filter newFilter) {
     state = state.copyWith(filter: newFilter);

@@ -35,10 +35,8 @@ class TodoListState extends Equatable {
 }
 
 class TodoList extends StateNotifier<TodoListState> {
-  // TodoList(super.state) {
-  //   TodoList(TodoListState.intial());
-  // }
-  TodoList() : super(TodoListState.initial());
+  // TodoList() : super(TodoListState.initial());
+  TodoList(super.state);
 
   void addTodo(String todoDesc) {
     final newTodo = Todo(desc: todoDesc);
