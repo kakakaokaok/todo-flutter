@@ -1,16 +1,12 @@
 # todo_provider
 
-A new Flutter project.
+A new Flutter project after [Sangwook's Udemy Provider course](https://www.udemy.com/course/flutter-provider-essential-korean/)
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This repository has four branches, starting from main, ramified to each types of provider.
+- CNP+CNPP used ChangeNotifierProvider with ChangeNotifierProxyProvider
+- CNP+PP used ChangeNotifierProvider with ProxyProvider
+- todo_provider_state used StateNotifierProvider
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+You will see what I mean in each main.dart file.
